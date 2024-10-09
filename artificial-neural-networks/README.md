@@ -1,4 +1,4 @@
-# Artificial Neural Networks - Notes
+# Artificial Neural Networks
 
 ## Concepts
 ### Universal Approximation Theorem
@@ -7,3 +7,6 @@ We can always find a large enough neural network architecture with the right set
 ### Traditional ML vs Deep Learning Workflow
 ![traditional-ml-workflow](./media/traditional-ml-workflow.png)
 ![deep-learning-workflow](./media/deep-learning-workflow.png)
+
+### Neuron/nodes
+$$a = f(w_{0} + \sum_{i=1}^{n}{w_{i}x_{i}})$$
