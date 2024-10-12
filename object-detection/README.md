@@ -8,6 +8,21 @@
 5. Building a model that can predict the class of object along with the target bounding-box offset corresponding to the region proposal
 6. Measuring the accuracy of object detection using mean average precision (mAP)
 
+## Models
+### R-CNN: Regions with CNN features
+*Rich feature hierarchies for accurate object detection and semantic segmentation*
+![r-cnn](./media/r-cnn.png)
+
+**Workflow**:
+1. Extract region proposals from an image. We need to ensure that we extract a high number of proposals to not miss out on any potential object within the image.
+2. Resize (warp) all the extracted regions to get regions of the same size.
+3. Pass the resized region proposals through a network. Typically, we pass the resized region proposals through a pretrained model, such as VGG16 or ResNet50, and extract the features in a fully connected layer.
+4. Create data for model training, where the input is features extracted by passing the region proposals through a pretrained model. The outputs are the class corresponding to each region proposal and the offset of the region proposal from the ground truth corresponding to the image.
+  - If a region proposal has an IoU greater than a specific threshold with the object, we create training data.
+  - We calculate the offset between the region proposal bounding box and the ground-truth bounding box as the differencebetween the center coordinates of the two bounding boxes `(dx, dy)`, and the difference between the height and width of the bounding boxes `(dw, dh)`
+5. Connect two output heads, one corresponding to the class of image and the other corresponding to the offset of region proposal with the ground-truth bounding box, to extract the fine bounding box on the object
+6. Train the model after writing a custom loss function that minimizes both the object classification error and the bounding-box offset error
+
 ## Concepts
 ### Felzenszwalb's algorithm
 *Efficient Graph-Based Image Segmentation*
@@ -19,7 +34,22 @@ image
 - region proposal algorithm
 - generate proposals of regions that are likely to be grouped together based on their pixel intensities
 - group pixels based on the hierarchical grouping of similar pixels (leverages the color, texture, size, and shape compatibility of content within an image)
-- Workflow:
+- **Workflow**:
   1. over-segments an image by grouping pixels based on the preceding attributes
   2. iterates through these over-segmented groups and groups them based on similarity
     - at each iteration, it combines smaller regions to form a larger region
+
+### Non-max suppression
+- **non-max**: boxes that don't have the highest probability of containing an object
+- **suppresion**: discarding those boxes
+- **Workflow**:
+  1. identify the bounding box that has the highest probability of containing the object
+  2. discard all the other bounding boxes that have an IoU below a certain threshold with the box (highest probability containing an object)
+
+### Mean average precision
+- **Precision**: $Precision = \frac{TP}{TP + FP}$
+  - **True positive**: bounding boxes that predicted the correct class of object and have an IoU with a ground truth that is greater than a certain threshold
+  - **False positive**: bounding boxes that predicted the class incorrectly or have an overlap that is less than the defined threshold with the ground truth
+  - If there are multiple bounding boxes that are identified for the same ground-truth bounding box, only one box can be a true positive, and everything else is a false positive
+- **Average precision**: average of precision values calculated at various IoU thresholds
+- **mAP**: average of precision values calculated at various IoU threshold values across all the classes of objects
