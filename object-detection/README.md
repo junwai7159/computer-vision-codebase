@@ -39,6 +39,16 @@
 5. Pass the RoI pooling output value through a fully connected layer
 6. Train the model to predict class and offsets corresponding to each region proposal
 
+### Faster R-CNN
+*Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks*
+
+**RPN Workflow**:
+1. Use a $3 \times 3$ convolutional layer with padding of 1 to transform the CNN output to a new output with $c$ channels 
+  - Each unit along the spatial dimensions of the CNN-extracted feature maps gets a new feature vector of length $c$
+2. Centered on each pixel of the feature maps, generate multiple anchor boxes of different scaled and aspect ratios and label them
+3. Using the length-$c$ feature vector at the center of each ancho box, predict the binary class (background or objects) and bounding box for this anchor box
+4. Consider those predicted bounding boxes whose predicted classes are objects. Remove overlapped results using non-maximum suppression. The remaining predicted bounding boxes for objects are the region proposals required by the region of interest pooling layer
+
 ## Concepts
 ### Felzenszwalb's algorithm
 *Efficient Graph-Based Image Segmentation*
@@ -72,6 +82,28 @@ image
 
 ### RoI Pooling
 - ensures fixed-size output for varying RoI dimensions
+
+### Anchor boxes
+- handy replacement for selective search
+  - majority of objects have a similar shape, e.g. the bounding box for a person will have a greater height than width
+  - objects of interest might be scaled, but maintains the aspect ratio (height/width)
+- define the anchor boxes with heights and width representing the majority of object's bounding boxes within the dataset
+  - obtained by using K-means clustering on top of the ground-truth bounding boxes
+- also create anchor boxes with varying scales (same center but different aspect ratios)
+- **Workflow**:
+  1. slide each anchor box over an image from top left to bottom right
+  2. the anchor box with a high IoU with the object will have a label that mentions it contains an objects, otherwise will be labelled as `0`
+
+### Region proposal network (RPN)
+- **RPN vs selective search**:
+  - selective search gives us a region candidate based on a set of computations on top of pixel values (done outside the neural network)
+  - RPN generates region candidates based on anchor boxes and the strides with which anchor boxes are slid over the image
+- **Workflow**:
+  1. Slide anchor boxes of different aspect ratios and sizes across the image to fetch crops of an image
+  2. Calculate the IoU between the ground-truth bounding boxes of objects in the image and the crops obtained in the previous step
+  3. Preparing the training dataset in such a way that crops with an IoU greater than a threshold contain an object, and crops with an IoU less than a threshold do not contain an object
+  4. Train the model to identify regions that contain an object
+  5. Perform NMS to identify the region candidate that has the highest probability of contaning an object and eliminate other region candidates that have a high overlap with it
 
 
 ## References
