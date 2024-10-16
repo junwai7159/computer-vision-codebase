@@ -35,4 +35,7 @@ https://erdem.pl/2020/02/understanding-region-of-interest-part-2-ro-i-align
 
 ### Fully Convolutional Network (FCN)
 - e.g U-Net
+- can accept inputs of any size
+  - The reason is that when using a convolutional layer, you select the size of the filter kernels, which are independent of the image/layer input size (provided that images smaller than the kernels are padded appropriately).
+  - once the kernel and step sizes are described, the convolution at each layer can generate appropriate dimension outputs according to the corresponding inputs
 https://d2l.ai/chapter_computer-vision/fcn.html
