@@ -30,6 +30,10 @@
 *Fast R-CNN*
 ![fast-r-cnn](./media/fast-r-cnn.png)
 
+**Advantages of Fast-RCNN over RCNN**
+- Fast-RCNN passes the entire image through the pretrained model to extract the features, and then fetches the region of features that corresponds to the region proposals (obtained from selective search) of the original image
+  - R-CNN generates region proposals for each image, resizing the crops of regions, and extracting features corresponding to each crop (region proposal) create a bottleneck
+
 **Workflow**:
 1. Pass the image through a pretrained model to extract features prior to the flatenning layer
 2. Extract region proposals corresponding to the image
@@ -41,13 +45,35 @@
 
 ### Faster R-CNN
 *Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks*
+![faster-r-cnn](./media/faster-r-cnn.png)
+
+**Advantages of Faster R-CNN over Fast R-CNN**
+1. Replace selective search with RPN: reduce region proposals without loss of accuracy
+  - Fast-RCNN: selective search usually generates a lot of region proposals
+2. End-to-end training: RPN is jointly trained with the rest of the model
+  - RPN learns to generate high-quality region proposals
+  - the objective function of the faster R-CNN includes not only the class and bounding box prediction in object detection, but also the binary class and bounding box prediction of anchor boxes in the region proposal network
 
 **RPN Workflow**:
 1. Use a $3 \times 3$ convolutional layer with padding of 1 to transform the CNN output to a new output with $c$ channels 
   - Each unit along the spatial dimensions of the CNN-extracted feature maps gets a new feature vector of length $c$
 2. Centered on each pixel of the feature maps, generate multiple anchor boxes of different scaled and aspect ratios and label them
-3. Using the length-$c$ feature vector at the center of each ancho box, predict the binary class (background or objects) and bounding box for this anchor box
+3. Using the length-$c$ feature vector at the center of each anchor box, predict the binary class (background or objects) and bounding box for this anchor box
 4. Consider those predicted bounding boxes whose predicted classes are objects. Remove overlapped results using non-maximum suppression. The remaining predicted bounding boxes for objects are the region proposals required by the region of interest pooling layer
+
+### YOLO
+*You Only Look Once: Unified, Real-Time Object Detection*
+
+**Advantages of YOLO over Faster-RCNN**
+1. One-stage vs Two-stage Detectors
+  - Faster R-CNN: RPN (proposed regions are sparse as the potential bounding box candidates can be infinite) + Classifier (predicts class and bounding box)
+  - YOLO: runs detection directly over a dense sampling of possible locations
+2. YOLO looks at the whole image while predicting the bounding box corresponding to an image
+  - Faster R-CNN: in the fully connected layer, only the detected region's RoI pooling output is passed as input
+  - in case of regions that do not fully encompass the object, the network has to guess the real boundaries of the object, as it has not seen the full image (but has seen only the region proposals)_
+
+### SSD
+https://lilianweng.github.io/posts/2018-12-27-object-recognition-part-4/
 
 ## Concepts
 ### Felzenszwalb's algorithm
