@@ -60,3 +60,11 @@
 1. **Depthwise convolution**: This step performs a convolution separately for each channel (a single color or feature) in the input image using a small filter (usually 3x3). The output of this step is the same size as the input but with fewer channels
 2. **Batch normalization**: This operation normalizes the activation values across each channel, helping to stabilize the training process and improve generalization performance
 3. **Activation function**: Typically, a ReLU (Rectified Linear Unit) activation function is used after batch normalization to introduce non-linearity in the network
+
+#### Mobile-Former
+*Mobile-Former: Bridging MobileNet and Transformer*
+1. Use MobileNet as a feature extractor, then fed into a transformer model
+2. Training MobileNet and ViT separately and then combining their predictions through ensemble techniques
+
+### ConvNext
+- A significatnt improvement to pure convolution models by incorporating techniques inspired by ViTs and achieving results comparable to ViTs in accuracy and scalability
