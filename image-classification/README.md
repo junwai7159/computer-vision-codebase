@@ -68,3 +68,19 @@
 
 ### ConvNext
 - A significatnt improvement to pure convolution models by incorporating techniques inspired by ViTs and achieving results comparable to ViTs in accuracy and scalability
+- TO-DO
+
+### ViT
+*An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale*
+- Inductive biases in CNNs, which are lacking in ViTs:
+  1. **Translational Equivariance**: an object can appear anywhere in the image, and CNNs can detect its features
+  2. **Locality**: pixels in an image interact mainly with its surrounding pixels to form features
+- ViTs are highly scalable and trained on massive amount of images, overcoming the need of these inductive biases
+
+### Swin Transformer
+
+### CvT
+
+### DiNAT
+
+### MobileViT v2

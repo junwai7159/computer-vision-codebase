@@ -17,6 +17,10 @@
 
 - mask: 0 or 1, indicates whether the pixel contains an object or not
 
+### MaskFormer
+
+### OneFormer
+
 ## Concepts
 ### Transposed Convolution
 https://makeyourownneuralnetwork.blogspot.com/2020/02/calculating-output-size-of-convolutions.html

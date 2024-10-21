@@ -74,6 +74,9 @@
 
 ### SSD
 https://lilianweng.github.io/posts/2018-12-27-object-recognition-part-4/
+- TO-DO
+
+### DETR
 
 ## Concepts
 ### Felzenszwalb's algorithm
