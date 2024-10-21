@@ -25,3 +25,25 @@
 - Image size
   - images of objects might not lose information if resized
   - images of text might lose considerable information
+
+
+## Models
+### MobileNet
+- Designed for mobile devices
+
+**Depthwise Separable Convolutions**
+1. Standard convolution
+![std-conv](./media/std-conv.png)
+- Combines the values of all the input channels
+- e.g. 3 channels --> 1 channel per pixel
+
+2. Depthwise convolution
+![depth-conv](./media/depth-conv.png)
+- Does not combine the input channels
+- Convolves on each channel separately
+- e.g. 3 channels --> 3 channels
+
+3. Pointwise convolution
+![point-conv](./media/point-conv.png)
+- Same as a standard convolution, except using a $1 \times 1$ kernel
+- Adds up the channels from depthwise convolution as a weighted sum
