@@ -15,6 +15,14 @@
 2. Fine-tuning the pre-trained model with task-specific data
 3. Utilizing the trained model for downstream tasks such as classification
 
+#### Tasks
+1. VQA & Visual Reasoning
+2. DocVQA
+3. Image Captioning
+4. Image-Text Retrieval
+5. Visual Grounding
+6. Text-to-Image Generation
+
 ### Visual Language Models (VLMs)
 #### Mechanism
 Given image-text pairs:
@@ -28,7 +36,7 @@ Given image-text pairs:
 #### Strategies
 - Translating images into embedding features that can be jointly trained with token embeddings
     - Images are divided into multiple smaller patches and each patch is treated as one token in the input sequence
-    - e.g.  VisualBERT, SimVLM
+    - e.g. VisualBERT, SimVLM
 - Learning good image embeddings that can work as a prefix for a frozen, pre-trained language model
     - Don't change the language model parameters, instead learn an embedding space for images, such that it is compatible with the language model
     - e.g. Frozen, ClipCap
@@ -36,6 +44,12 @@ Given image-text pairs:
     - e.g. VisualGPT
 - Combine vision and language models without any training
     - e.g. MAGiC
+
+#### Evaluation
+1. Zero-shot prediction
+    - Directly apply pre-trained VLMs to downstream tasks without any task-specific fine-tuning
+2. Linear probing
+    - Freeze the pre-trained VLM and train a linear classifier to classify the VLM-encoded embeddings to measure its representation
 
 ## Models
 ### CLIP
@@ -58,6 +72,7 @@ Given image-text pairs:
 
 ### LayoutLM
 *LayoutLM: Pre-training of Text and Layout for Document Image Understanding*
+
 ![layoutlm](./media/layoutlm.png)
 
 **Document layout analysis**: build a single model that is able to assign a value corresponding to each text within the document image.
@@ -74,10 +89,10 @@ their bounding-box coordinates (x0, x1, y0, and y1) – this is doneusing tools 
 
 ### LayoutLMv3
 *LayoutLMv3: Pre-training for Document AI with Unified Text and Image Masking*
+
 ![layoutlmv3](./media/layoutlmv3.png)
 
 **Workflow**:
-The preceding architecture shows the following steps:
 1. Words are obtained from an image using a typical OCR parser.
 2. The words are then converted into embeddings using the RoBERTa model.
 3. The document is resized into a fixed shape and then converted into multiple patches.
