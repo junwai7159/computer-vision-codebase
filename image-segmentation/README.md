@@ -17,6 +17,8 @@
 
 - mask: 0 or 1, indicates whether the pixel contains an object or not
 
+### SAM
+
 ### MaskFormer
 
 ### OneFormer

@@ -1,6 +1,50 @@
 # CV + NLP
 
+## Concepts
+### Multimodality
+#### Challenges
+1. **Representation**: explores techniques to effectively summarize multimodal data, capturing the intricate connections among individual modality elements
+2. **Alignment**: focuses on identifying connections and interactions across all elements
+3. One modality may dominate others
+4. Additional modalities can introduce noise
+5. Full coverage over all modalities is not guaranteed
+6. Different modalities can have complicated relationships
+
+#### Paradigm
+1. Pre-training the model with extensive training data
+2. Fine-tuning the pre-trained model with task-specific data
+3. Utilizing the trained model for downstream tasks such as classification
+
+### Visual Language Models (VLMs)
+#### Mechanism
+Given image-text pairs:
+- Extract image and text features using text and image encoders
+- Learn the vision-language correlation with certain pre-training objectives (divided into 3 groups):
+    1. **Contrastive** objectives: to learn discriminative representations by pulling paired samples close and pushing others faraway in the embedding space 
+    2. **Generative** objectives: to learn semantic features by training networks to generate image/text data
+    3. **Alignment** objectives: align the image-text pair via global image-text matching or local region-word matching on embedding space
+- With the learned vision-language correlation, VLMs can be evaluated on unseen data in a zero-shot manner
+
+#### Strategies
+- Translating images into embedding features that can be jointly trained with token embeddings
+    - Images are divided into multiple smaller patches and each patch is treated as one token in the input sequence
+    - e.g.  VisualBERT, SimVLM
+- Learning good image embeddings that can work as a prefix for a frozen, pre-trained language model
+    - Don't change the language model parameters, instead learn an embedding space for images, such that it is compatible with the language model
+    - e.g. Frozen, ClipCap
+- Using a specially designed cross-attention mechanism to fuse visual information into layers of the language model
+    - e.g. VisualGPT
+- Combine vision and language models without any training
+    - e.g. MAGiC
+
 ## Models
+### CLIP
+*Learning Transferable Visual Models From Natural Language Supervision*
+![clip](./media/clip.png)
+
+
+- Utilizes an image-text contrastive object, to capture rich vision-language correspondence knowledge, enabling zero-shot predictions
+- Outperformed ImageNet models on out-of-distribution tasks
 
 ### Tr-OCR
 *TrOCR: Transformer-based Optical Character Recognition with Pre-trained Models*
