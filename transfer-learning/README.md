@@ -8,3 +8,10 @@
 ### Multi-task learning
 - Prediction of multiple items in a single shot
 - e.g. age estimation and gender classification
+
+### Self-training / self-supervised?
+
+### Siamese networks
+
+### Triplet loss
+https://stanford.edu/~shervine/teaching/cs-230/cheatsheet-convolutional-neural-networks#face
