@@ -66,21 +66,44 @@
 1. Use MobileNet as a feature extractor, then fed into a transformer model
 2. Training MobileNet and ViT separately and then combining their predictions through ensemble techniques
 
+### DenseNet
+
+
 ### ConvNext
 - A significatnt improvement to pure convolution models by incorporating techniques inspired by ViTs and achieving results comparable to ViTs in accuracy and scalability
 - TO-DO
 
 ### ViT
 *An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale*
+
+![vit](./media/vit.png)
+
 - Inductive biases in CNNs, which are lacking in ViTs:
   1. **Translational Equivariance**: an object can appear anywhere in the image, and CNNs can detect its features
   2. **Locality**: pixels in an image interact mainly with its surrounding pixels to form features
 - ViTs are highly scalable and trained on massive amount of images, overcoming the need of these inductive biases
 
 ### Swin Transformer
+*Swin Transformer: Hierarchical Vision Transformer using Shifted Windows*
 
-### CvT
+*Swin Transformer V2: Scaling Up Capacity and Resolution*
 
-### DiNAT
+![swin-1](./media/swin-1.png)
+
+![swin-2](./media/swin-2.png)
+
+#### Shifted windows
+- In the original ViT, attention is done between patch and all other patches, the processing time complexity increases quadratically with image dimensions
+- Shifted window mechanism helps the model to extract features at variable scales and also restricts the computational complexity with respect to image size to linear
+- Each window block is divided into patches and fed to model in same way the vision transformer processes the entire input image
+- The self-attention block of the transformer computes the key-query weight for these patches within these windows
+- This helps the model emphasize on small scale features, but since the relationship between the patches are computed within the windows self-attention mechanism, it's unable to capture the global context which is a key feature in transformers
+- Window partitioning in successive layers:
+  - In the first layer, the image is divided into windows by red boxes. Each window is further divided into patches denoted by gray boxes
+  - In the second layer, this window is shifted, and these windows are overlapping with the windows divided in the previous layer
+
+### Convolutional Vision Transformer (CvT)
+
+### Dilated Neighborhood Attention Transformer (DiNAT)
 
 ### MobileViT v2
