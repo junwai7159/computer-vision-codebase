@@ -68,6 +68,7 @@
 
 ### DenseNet
 
+### EfficientNet
 
 ### ConvNext
 - A significatnt improvement to pure convolution models by incorporating techniques inspired by ViTs and achieving results comparable to ViTs in accuracy and scalability
