@@ -40,6 +40,8 @@
 - When generating sequences, the model predics each element based on the previous elements
 - In teacher forcing however, rather than using the model's own predictions as inputs for the next step, the true values from the training data are fed as inputs for each subsequent step
 
+### Meta-Learning
+
 ### Zero-shot Computer Vision
 
 ### Ethics & Biases

@@ -68,6 +68,8 @@
 
 ### DenseNet
 
+### SqueezeNet
+
 ### EfficientNet
 
 ### ConvNext
