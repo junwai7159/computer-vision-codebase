@@ -45,3 +45,17 @@
 ### Zero-shot Computer Vision
 
 ### Ethics & Biases
+
+### Neural Tangent Kernel (NTK)
+
+### Hessian Matrix
+
+## Models
+
+### Mixup
+
+### RandAugment
+
+### I-JEPA
+
+*Self-Supervised Learning from Images with a  Joint-Embedding Predictive Architecture*
